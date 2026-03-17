@@ -11,10 +11,10 @@ export function trimSymbols(string, size) {
   let result = "";
 
   for (const char of string) {
-    let repeatLimit = char.repeat(size);
-    let isLimitReached = result.endsWith(repeatLimit);
+    const repeatLimit = char.repeat(size);
+    const isLimitReached = result.endsWith(repeatLimit);
 
-    if (isLimitReached === false) {
+    if (!isLimitReached) {
       result += char;
     }
   }

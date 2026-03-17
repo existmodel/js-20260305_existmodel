@@ -6,7 +6,7 @@
 export function createGetter(path) {
   const keys = path.split(".");
 
-  return function (obj) {
+  return (obj) => {
     let result = obj;
 
     for (const key of keys) {
