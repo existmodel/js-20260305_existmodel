@@ -26,7 +26,7 @@ export default class Tooltip {
     document.body.append(this.element);
   }
 
-  private initialize() {
+  public initialize() {
     document.addEventListener("pointerover", this.showTooltip);
     document.addEventListener("pointerout", this.hideTooltip);
   }
