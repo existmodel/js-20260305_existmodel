@@ -4,8 +4,6 @@ export default class Tooltip {
   public static activeMessage: Tooltip | null = null;
 
   constructor() {
-    this.element;
-
     if (Tooltip.activeMessage) {
       return Tooltip.activeMessage;
     }
@@ -29,6 +27,7 @@ export default class Tooltip {
   public initialize() {
     document.addEventListener("pointerover", this.showTooltip);
     document.addEventListener("pointerout", this.hideTooltip);
+    document.addEventListener("pointermove", this.moveTooltip);
   }
 
   private showTooltip = (event: PointerEvent) => {
@@ -53,12 +52,21 @@ export default class Tooltip {
     this.element = null;
   };
 
-  public destroy() {
-    if (!this.element) {
-      return;
+  private moveTooltip = (event: PointerEvent) => {
+    if (this.element) {
+      const shift = 10;
+      const left = event.clientX + shift;
+      const top = event.clientY + shift;
+
+      this.element.style.left = `${left}px`;
+      this.element.style.top = `${top}px`;
     }
+  };
+
+  public destroy() {
     document.removeEventListener("pointerover", this.showTooltip);
     document.removeEventListener("pointerout", this.hideTooltip);
+    document.removeEventListener("pointermove", this.moveTooltip);
     this.remove();
   }
 

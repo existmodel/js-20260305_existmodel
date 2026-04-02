@@ -13,12 +13,12 @@ interface SortableTableHeader {
   sortable?: boolean;
   sortType?: "string" | "number" | "custom";
   template?: (value: string | number) => string;
-  customSorting?: (a: SortableTableData, b: SortableTableData) => number; //— поддержка кастомной функции сортировки для колонок (уже описана в headersConfig)
+  customSorting?: (a: SortableTableData, b: SortableTableData) => number;
 }
 
 interface Options {
   data?: SortableTableData[];
-  sorted?: SortableTableSort; // объект начальной сортировки вида { id, order }.
+  sorted?: SortableTableSort;
   isSortLocally?: boolean;
 }
 
@@ -87,7 +87,7 @@ export default class SortableTable {
               : `<div class="sortable-table__cell">${cellValue}</div>`;
           })
           .join("");
-        return `<div class="sortable-table__row">${cells}</div>`;
+        return `<a href="/products/${row.id}" class="sortable-table__row">${cells}</a>`;
       })
       .join("");
 
@@ -125,6 +125,11 @@ export default class SortableTable {
       this.data = [...this.data].sort(
         (a, b) => directions[order] * (Number(a[field]) - Number(b[field])),
       );
+    } else if (type === "custom" && sortColumnConfig.customSorting) {
+      const customSorting = sortColumnConfig.customSorting;
+      this.data = [...this.data].sort((a, b) => {
+        return directions[order] * customSorting(a, b);
+      });
     }
 
     const allCells = this.element.querySelectorAll("[data-id]");
@@ -165,7 +170,7 @@ export default class SortableTable {
     if (!this.element) {
       return;
     }
-    document.removeEventListener("pointerdown", this.clickOnHeader);
+    this.element.removeEventListener("pointerdown", this.clickOnHeader);
     this.element.remove();
   }
 }
