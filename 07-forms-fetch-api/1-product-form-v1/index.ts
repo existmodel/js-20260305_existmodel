@@ -171,7 +171,9 @@ export default class ProductForm {
 
   private addEventListeners(): void {
     this.element?.addEventListener("submit", this.save);
-    this.element?.addEventListener("click", this.uploadImage);
+    this.element
+      ?.querySelector('[name="uploadImage"]')
+      ?.addEventListener("click", this.uploadImage);
   }
 
   private uploadImage = (event: Event): void => {
@@ -317,7 +319,9 @@ export default class ProductForm {
 
   public destroy(): void {
     this.element?.removeEventListener("submit", this.save);
-    this.element?.removeEventListener("click", this.uploadImage);
+    this.element
+      ?.querySelector('[name="uploadImage"]')
+      ?.removeEventListener("click", this.uploadImage);
     this.remove();
     this.element = undefined;
   }
