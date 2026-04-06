@@ -61,7 +61,7 @@ export default class ColumnChart {
 
     const element = createElement(`
     <div class="column-chart" style="--chart-height: ${this.chartHeight}">
-      <div class="column-chart__title">
+      <div class="column-chart__title">Total
         ${this.label}
         ${link}
       </div>
@@ -78,15 +78,17 @@ export default class ColumnChart {
   }
 
   private getColumnBody(data: number[]): string {
-    const maxValue = Math.max(...data);
+    //добавляем нормализацию данных через Math.max(0, item) перед расчетом максимума, чтобы отрицательные значения не сломали логику масштабирования и отображения столбцов.
+    const normalizedData = data.map((item) => Math.max(0, item));
+    const maxValue = Math.max(...normalizedData);
 
-    if (!data.length || maxValue === 0) {
+    if (!normalizedData.length || maxValue === 0) {
       return "";
     }
 
     const scale = this.chartHeight / maxValue;
 
-    return data
+    return normalizedData
       .map((item) => {
         const value = Math.floor(item * scale);
         const percent = ((item / maxValue) * 100).toFixed(0) + "%";
