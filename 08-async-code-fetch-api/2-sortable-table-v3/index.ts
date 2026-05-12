@@ -231,17 +231,25 @@ export default class SortableTable {
     url.searchParams.set("_start", String(this.start ?? 0));
     url.searchParams.set("_end", String(this.end ?? this.step ?? 30));
 
-    const data = await fetchJson<any[]>(url.toString());
-    this.data = data;
+    try {
+      const data = await fetchJson<any[]>(url.toString());
+      this.data = data;
 
-    if (data.length === 0) {
+      if (data.length === 0) {
+        this.element.classList.add("sortable-table_empty");
+      } else {
+        this.element.classList.remove("sortable-table_empty");
+      }
+
+      this.element.classList.remove("sortable-table_loading");
+      return data;
+    } catch (err) {
+      console.error("Failed to load data:", err);
       this.element.classList.add("sortable-table_empty");
-    } else {
-      this.element.classList.remove("sortable-table_empty");
+      return [];
+    } finally {
+      this.element.classList.remove("sortable-table_loading");
     }
-
-    this.element.classList.remove("sortable-table_loading");
-    return data;
   }
 
   private clickOnHeader = (event: PointerEvent) => {
