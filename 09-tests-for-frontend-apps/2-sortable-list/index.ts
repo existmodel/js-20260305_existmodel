@@ -52,7 +52,7 @@ export default class SortableList {
     if (grabHandle) {
       const draggingElement = grabHandle.closest("li");
 
-      if (draggingElement) {
+      if (draggingElement && this.element?.contains(draggingElement)) {
         const { left, top, width, height } =
           draggingElement.getBoundingClientRect();
 
