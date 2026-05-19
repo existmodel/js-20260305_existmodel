@@ -37,6 +37,9 @@
   ],
   "exclude": [
     "**/__mocks__/**",
-    "node_modules"
+    "node_modules",
+    "09-tests-for-frontend-apps/playwright.config.ts",
+  "09-tests-for-frontend-apps/e2e/**"
   ]
+
 }
