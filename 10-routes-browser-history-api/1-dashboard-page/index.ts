@@ -16,7 +16,7 @@ type PageComponents = {
 };
 
 export default class Page {
-  public element?: HTMLElement;
+  public element!: HTMLElement;
 
   private components: Partial<PageComponents> = {};
 
@@ -138,7 +138,6 @@ export default class Page {
       this.handleDateSelect,
     );
     this.remove();
-    this.element = undefined;
 
     this.components.ordersChart?.destroy();
     this.components.rangePicker?.destroy();

@@ -160,7 +160,7 @@ export default class SortableTable {
     }
   }
 
-  private sortOnClient(field: string, order: SortOrder) {
+  public sortOnClient(field: string, order: SortOrder) {
     const sortColumnConfig = this.headersConfig.find((col) => col.id === field);
 
     const type = sortColumnConfig?.sortType;
@@ -192,7 +192,7 @@ export default class SortableTable {
     this.updateDOM(field, order);
   }
 
-  private async sortOnServer(field: string, order: SortOrder) {
+  public async sortOnServer(field: string, order: SortOrder) {
     this.sorted = { id: field, order: order };
     this.start = 0;
     this.end = this.step;

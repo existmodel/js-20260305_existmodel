@@ -46,7 +46,7 @@ interface Product {
 
 export default class ProductForm {
   public productId?: string;
-  public element?: HTMLElement;
+  public element!: HTMLElement;
 
   private categories: Category[] = [];
   private productData?: Product;
@@ -329,6 +329,5 @@ export default class ProductForm {
       ?.querySelector('[name="uploadImage"]')
       ?.removeEventListener("click", this.uploadImage);
     this.remove();
-    this.element = undefined;
   }
 }
