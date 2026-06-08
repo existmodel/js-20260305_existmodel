@@ -109,7 +109,9 @@ export class RouterNavApi {
     });
 
     const element = await this.currentPage.render();
-    this.#root.replaceChildren(element);
+    if (element) {
+      this.#root.replaceChildren(element);
+    }
     this.#updateNav(pathname);
     this.#updateTitle(route.title);
   }
