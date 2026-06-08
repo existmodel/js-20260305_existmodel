@@ -36,8 +36,6 @@ export default class SortableList {
   }
 
   private onPointerDown = (event: PointerEvent) => {
-    event.preventDefault();
-
     const deleteHandle = (event.target as Element).closest(
       "[data-delete-handle]",
     );
@@ -50,6 +48,7 @@ export default class SortableList {
     }
 
     if (grabHandle) {
+      event.preventDefault();
       const draggingElement = grabHandle.closest("li");
 
       if (draggingElement && this.element?.contains(draggingElement)) {
@@ -127,6 +126,8 @@ export default class SortableList {
     this.state.draggingElement.classList.remove("sortable-list__item_dragging");
     this.state.draggingElement.style.cssText = "";
     this.resetState();
+
+    dispatchEvent(new CustomEvent("sortable-list-reorder", { bubbles: true }));
   };
 
   private resetState() {

@@ -34,6 +34,7 @@ export default class Page {
 
     this.components.sortableTable = new SortableTable(header, {
       url: "api/dashboard/bestsellers",
+      sorted: { id: "createdAt", order: "desc" },
     });
     this.components.rangePicker = new RangePicker({
       from: this.from,
@@ -124,6 +125,7 @@ export default class Page {
     this.components.sortableTable?.destroy();
     this.components.sortableTable = new SortableTable(header, {
       url: `api/dashboard/bestsellers?from=${from.toISOString()}&to=${to.toISOString()}`,
+      sorted: { id: "createdAt", order: "desc" },
     });
     if (this.element) {
       this.element

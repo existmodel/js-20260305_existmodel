@@ -98,7 +98,7 @@ export default class ProductForm {
         <div data-element="imageListContainer">
          <ul class="sortable-list"></ul>
         </div>
-        <button type="button" name="uploadImage" class="button-primary-outline"><span>Загрузить</span></button>
+        <button type="button" name="uploadImage" class="button-primary-outline fit-content"><span>Загрузить</span></button>
       </div>
       <div class="form-group form-group__half_left">
         <label class="form-label">Категория</label>
@@ -179,12 +179,12 @@ export default class ProductForm {
       <input type="hidden" name="url" value="${escapeHtml(url)}">
       <input type="hidden" name="source" value="${escapeHtml(source)}">
       <span>
-        <img src="icon-grab.svg" data-grab-handle="" alt="grab">
+        <img src="/icon-grab.svg" data-grab-handle="" alt="grab">
         <img class="sortable-table__cell-img" alt="${escapeHtml(source)}" src="${escapeHtml(url)}">
         <span>${escapeHtml(source)}</span>
       </span>
       <button type="button">
-        <img src="icon-trash.svg" data-delete-handle="" alt="delete">
+        <img src="/icon-trash.svg" data-delete-handle="" alt="delete">
       </button>`;
     return element;
   }

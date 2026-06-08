@@ -34,6 +34,7 @@
     "08-async-code-fetch-api/**/*.ts",
     "09-tests-for-frontend-apps/**/*.ts",
     "10-routes-browser-history-api/**/*.ts",
+    "11-spa-admin/**/*.ts"
   ],
   "exclude": [
     "**/__mocks__/**",
